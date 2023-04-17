@@ -1,0 +1,52 @@
+Multiplex Seat Reservation System
+
+This project is a seat reservation system for a multiplex.
+It allows users to select a movie screening, reserve seats and check available seats for a given screening.
+
+Features:
+    1. Users can select the day and time they would like to see a movie.
+    2. The system lists available movies in the given time interval, including title and screening times.
+    3. Users can choose a particular screening and view information about the screening and available seats.
+    4. Users can reserve seats and provide the name of the person making the reservation.
+    5. The system returns the total amount to pay and the reservation expiration time.
+
+Endpoints:
+    `GET /movies`: Get a list of available movie screenings based on a time range.
+    `GET /screenings/:id`: Get a information about chosen screening.
+    `POST /reservations`: Create a new reservation with the provided user information, seat selections, and ticket types.
+    `GET /reservations/:id`: Get the reservation info for a specific reservation ID and amount to pay.
+
+Technical stack:
+    - Scala 2.13.10
+    - SBT
+    - Akka Actor
+    - Akka Streams
+    - Akka HTTP
+    - Softwaremill Macwire
+    - Circe
+    - Cats
+    - Logback & SLF4J
+    - Slick
+    - PostgreSQL
+    - Flyway
+    - Docker
+    - Docker Compose
+
+Run:
+    1. Clone the repository.
+    2. Depending on operational system you use run the following command:
+        - Windows: `./start.ps1`
+        - Linux: `./start.sh`
+      This will automatically install all dependencies, setup a database, perform a migration and start the server.
+    3. To run tests you need  run the following command:
+        - Windows: `./test.ps1`
+        - Linux: `./test.sh`
+      This will perform tests on the project.
+    4.(*) Additionally I provided postman collection with all endpoints.
+     You can import it to your postman and test the endpoints.
+
+Contributing:
+    Contributions are welcome! Please submit a pull request or open an issue to make improvements or fix bugs.
+
+License:
+    This project is licensed under the MIT License.

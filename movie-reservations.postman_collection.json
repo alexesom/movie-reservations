@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "2825343b-9ec9-4b8b-8c5b-a8184927bb0e",
+		"name": "recruitTouk",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21373281"
+	},
+	"item": [
+		{
+			"name": "Get movies and screenings by interval",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/movies?from_time=2017-01-13T17:09:42.411&to_time=2025-01-13T17:09:42.411",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"movies"
+					],
+					"query": [
+						{
+							"key": "from_time",
+							"value": "\"2017-01-13T17:09:42.411\""
+						},
+						{
+							"key": "to_time",
+							"value": "\"2025-01-13T17:09:42.411\""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get seats by screening id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/screenings/d21f04af-4c84-4a4d-9d4c-5665b5f7cfcc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"screenings",
+						"d21f04af-4c84-4a4d-9d4c-5665b5f7cfcc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Make reservation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"screeningId\": \"d21f04af-4c84-4a4d-9d4c-5665b5f7cfcc\",\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"selectedSeatsWithTicketsTypes\": [\r\n    {\r\n      \"seatId\": \"cad9e92c-7bf9-4079-806e-c492fb1cc59b\",\r\n      \"ticketType\": \"adult\"\r\n    },\r\n    {\r\n      \"seatId\": \"e9e3b974-5192-4f09-9162-c0b523800243\",\r\n      \"ticketType\": \"student\"\r\n    }\r\n  ]\r\n\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/reservations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get reservation info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/reservations/f00ef02a-f16e-49bd-ab61-3c19da1f7c8c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"reservations",
+						"f00ef02a-f16e-49bd-ab61-3c19da1f7c8c"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
