@@ -14,7 +14,7 @@ services:
     stdin_open: true
     tty: true
     environment:
-      INTERFACE: ${INTERFACE}
+      INTERFACE: "0.0.0.0"
       PORT: ${PORT}
       PG_USER: ${PG_USER}
       PG_PASSWORD: ${PG_PASSWORD}

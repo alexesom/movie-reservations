@@ -83,7 +83,10 @@ class ReservationRepository(
       case (_, seatsInRow) =>
         val selectedSeatsInRow = selectedAndReservedSeats.filter(seat => seatsInRow.exists(_.id == seat.id))
 
-        val selectedSeatNumbersInRow = selectedSeatsInRow.map(_.seatNumber).sorted
+        val selectedSeatNumbersInRow =
+          selectedSeatsInRow
+            .map(_.seatNumber)
+            .sorted
 
 
         selectedSeatNumbersInRow.sliding(2).forall {
@@ -113,13 +116,20 @@ class ReservationRepository(
   override def getReservedSeats(reservationId: UUID): OptionT[Future, Seq[ReservedSeat]] = {
     val query = reservedSeatsTableQuery.filter(_.reservationId === reservationId)
 
-    OptionT(db.run(query.result).map(_.toSeq).map(Option.apply))
+    OptionT(
+      db.run(query.result)
+        .map(_.toSeq)
+        .map(Option.apply)
+    )
   }
 
   override def cancelExpiredReservations(): Future[Unit] = {
     val now = LocalDateTime.now()
 
-    val expiredReservationsQuery   = reservationsTableQuery.filter(_.expirationTime < now)
+    val expiredReservationsQuery   =
+      reservationsTableQuery
+        .filter(_.expirationTime < now)
+        .filter(_.paymentStatus === PaymentStatus.Pending)
 
     val expiredReservationIdsQuery = expiredReservationsQuery.map(_.id)
 

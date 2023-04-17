@@ -28,7 +28,7 @@ class MovieListService(movieRepository: MovieRepositoryInterface)
     MovieWithScreeningsInfo(movie, screeningInfos)
   }
 
-  def listMovieScreenings(fromTime: LocalDateTime, toTime: LocalDateTime): Future[Seq[MovieWithScreeningsInfo]] = {
+  override def listMovieScreenings(fromTime: LocalDateTime, toTime: LocalDateTime): Future[Seq[MovieWithScreeningsInfo]] = {
     logger.info(s"Listing movies with screenings between $fromTime and $toTime")
     val movieScreenings: Future[MoviesWithScreenings] = movieRepository.listMovieScreenings(fromTime, toTime)
 

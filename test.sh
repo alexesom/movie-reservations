@@ -12,15 +12,16 @@ command -v jq >/dev/null 2>&1 || {
   apt-get install -y jq
 }
 
-INTERFACE=${INTERFACE:-"localhost"}
+INTERFACE=${INTERFACE:-"0.0.0.0"}
 PORT=${PORT:-"8000"}
 baseURL="http://${INTERFACE}:${PORT}/api/v1"
-moviesEndpoint='/movies?from_time=2017-01-13T17:09:42.411&to_time=2025-01-13T17:09:42.411'
+moviesEndpoint="/movies?from_time=%222017-01-13T17:09:42.411%22&to_time=%222025-01-13T17:09:42.411%22"
 
 moviesResponse=$(curl -s "${baseURL}${moviesEndpoint}")
 
 echo "Movies:"
 echo "${moviesResponse}"
+echo "${baseURL}${moviesEndpoint}"
 echo ""
 
 firstScreeningId=$(echo "${moviesResponse}" | jq -r '.[0].screening_times[0].screening_id')
@@ -31,6 +32,7 @@ screeningResponse=$(curl -s "${baseURL}${screeningsEndpoint}")
 
 echo "Screening:"
 echo "${screeningResponse}"
+echo "${baseURL}${screeningsEndpoint}"
 echo ""
 
 seatId1=$(echo "${screeningResponse}" | jq -r '.seats[0].id')
@@ -61,6 +63,7 @@ reservationResponse=$(curl -s -X POST -H "Content-Type: application/json" -d "${
 
 echo "Make Reservation:"
 echo "${reservationResponse}"
+echo "${baseURL}${reservationsEndpoint}"
 echo ""
 
 reservationId=$(echo "${reservationResponse}" | jq -r '.reservationId')
@@ -71,4 +74,5 @@ reservationDetailsResponse=$(curl -s "${baseURL}${reservationDetailsEndpoint}")
 
 echo "Reservation Details:"
 echo "${reservationDetailsResponse}"
+echo "${baseURL}${reservationDetailsEndpoint}"
 echo ""

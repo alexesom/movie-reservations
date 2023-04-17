@@ -12,7 +12,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8000/api/v1/movies?from_time=\"2017-01-13T17:09:42.411\"&to_time=\"2025-01-13T17:09:42.411\"",
+					"raw": "http://localhost:8000/api/v1/movies?from_time=2017-01-13T17:09:42.411&to_time=2025-01-13T17:09:42.411",
 					"protocol": "http",
 					"host": [
 						"localhost"

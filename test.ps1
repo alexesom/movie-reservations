@@ -1,7 +1,7 @@
 $INTERFACE = $env:INTERFACE
 $PORT = $env:PORT
 $baseURL = "http://$INTERFACE" + ":$PORT/api/v1"
-$moviesEndpoint = '/movies?from_time="2017-01-13T17:09:42.411"&to_time="2025-01-13T17:09:42.411"'
+$moviesEndpoint = '/movies?from_time=%222017-01-13T17:09:42.411%22&to_time=%222025-01-13T17:09:42.411%22'
 
 $moviesResponse = Invoke-WebRequest -Uri ($baseURL + $moviesEndpoint) -Method GET
 

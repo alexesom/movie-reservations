@@ -14,21 +14,21 @@ trait ScreeningListServiceInterface extends LazyLogging {
 
 class ScreeningListService(screeningRepository: ScreeningRepositoryInterface)
                           (implicit val ec: ExecutionContext)
-    extends ScreeningListServiceInterface {
+  extends ScreeningListServiceInterface {
 
-    def getScreeningDetails(screeningId: UUID): Future[ScreeningListResult] = {
-      logger.info(s"Getting screening details for screening $screeningId")
+  override def getScreeningDetails(screeningId: UUID): Future[ScreeningListResult] = {
+    logger.info(s"Getting screening details for screening $screeningId")
 
-      (for {
-        screening      <- screeningRepository.getScreening(screeningId)
-        availableSeats <- screeningRepository.getAvailableSeats(screening.id)
-      } yield {
-        val screeningWithSeats = ScreeningWithSeats(screening, availableSeats)
+    (for {
+      screening      <- screeningRepository.getScreening(screeningId)
+      availableSeats <- screeningRepository.getAvailableSeats(screening.id)
+    } yield {
+      val screeningWithSeats = ScreeningWithSeats(screening, availableSeats)
 
-        Found(screeningWithSeats)
-      })
-        .getOrElse(NotFound)
-    }
+      Found(screeningWithSeats)
+    })
+      .getOrElse(NotFound)
+  }
 }
 
 object ScreeningListService {
